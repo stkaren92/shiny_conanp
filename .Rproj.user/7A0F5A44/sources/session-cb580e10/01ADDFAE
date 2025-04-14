@@ -3,7 +3,7 @@
     "path": "~/Dropbox/JANO/2024/conabio/shiny_conanp/server.R",
     "project_path": "server.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "3908628675",
     "contents": "",
     "dirty": false,
     "created": 1657905150802.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "13,2",
+        "cursorPosition": "13,0",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1732335369,
+    "lastKnownWriteTime": 1744668901,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1732335369101,
+    "last_content_update": 1744668901373,
     "read_only": false,
     "read_only_alternatives": []
 }

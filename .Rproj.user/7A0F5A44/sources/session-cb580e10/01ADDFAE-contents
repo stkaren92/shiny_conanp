@@ -10,6 +10,8 @@ library(leaflet)
 #library(gridExtra)
 
 # Define server logic for slider examples
+
+
 shinyServer(function(input, output, session){
   
  ##   # para cambiar las imagenes
