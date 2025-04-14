@@ -1,0 +1,12 @@
+name: shiny_conanp
+title: shiny_conanp
+username:
+account: conabio
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6649023
+bundleId: 9405543
+url: https://conabio.shinyapps.io/shiny_conanp/
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: database/BASE Preliminar_2022.xlsx|database/Consulta_Alex_abril.xlsx|other_files/Presentacion_17may16.ppt

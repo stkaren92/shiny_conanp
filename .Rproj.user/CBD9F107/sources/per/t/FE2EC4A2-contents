@@ -1,0 +1,72 @@
+
+
+library(shiny)
+
+# Define UI for slider demo application
+shinyUI(fluidPage(
+  #list(tags$head(tags$style("body {background-color: #87CEEB; }"))),
+  #  Application title
+  titlePanel("Razas de maices PROMAC"),
+  
+  
+  # Sidebar with sliders that demonstrate various available
+  # options
+  sidebarLayout(
+    sidebarPanel(
+      
+      # Seleccionar la Regi?n
+      selectInput("RegionCONANP",
+                  "Region Conanp:",
+                  #c("All",unique(as.character(TableL[order(TableL$RegionCONANP),3])))),
+                  c("All", levels(TableL$RegionCONANP))),
+                    
+      
+      selectInput("ANP_RPC_CONANP",
+                  "ANP:",
+                 # c("All", unique(as.character(TableL[order(TableL$ANP_RPC_CONANP),4])))),
+                  c("All", levels(TableL$ANP_RPC_CONANP))),
+      
+      selectInput("Estado",
+                  "Estado:",
+                  #c("All", unique(as.character(TableL[order(TableL$Estado),6])))),
+                  c("All", levels(TableL$Estado))),
+      
+      
+      selectInput("RazaPrimaria",
+                  "Raza Primaria:",
+                  #c("All", unique(as.character(TableL[order(TableL$RazaPrimaria),1])))),
+                  c("All", levels(TableL$RazaPrimaria))),
+      
+      checkboxGroupInput('AnioColecta', 'Year:',
+        choice = levels(TableL$AnioColecta),selected = levels(TableL$AnioColecta)),
+      
+      #selectInput(inputId="RazaPrimaria",
+      #                   label= h4("Raza Primaria"), 
+      #            choice=levels(TableL$RazaPrimaria),selected=c("Ancho")),
+      
+      #h4("Actualizar"),
+      #actionButton("update", label = "Action"),
+            br(),
+      
+      downloadButton('downloadData', 'Download como csv'),
+      br(),
+      br(),
+      #downloadButton('downloadData1', 'Download como pdf'),
+      h4("Informacion General sobre PROMAC"),
+      tags$a(href = "http://www.conanp.gob.mx/maiz_criollo/", "PROMAC"),
+      #br(),
+      #h4("Download Full Database"),
+      #tags$a(href="http://www.biodiversidad.gob.mx/genes/pdf/proyecto/Anexo13_Base%20de%20datos/BaseMaicesNativos.xlsx", "DataBase")
+        width = 2),
+      
+    fluidRow(
+      column(9,leafletOutput("mymap", height = 700)),
+      #column(5,plotOutput("hexagonmap",height = 600)),
+      #br(),
+      column(9, wellPanel(
+      dataTableOutput(outputId = "TableL")))
+      )
+    
+  )
+))
+

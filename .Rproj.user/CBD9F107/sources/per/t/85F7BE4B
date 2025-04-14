@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1566613120469.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2239317930",
+    "id" : "85F7BE4B",
+    "lastKnownWriteTime" : 1468645346,
+    "last_content_update" : 1468645346,
+    "path" : "~/Dropbox/JANO/2016/Conabio/shiny_conanp/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

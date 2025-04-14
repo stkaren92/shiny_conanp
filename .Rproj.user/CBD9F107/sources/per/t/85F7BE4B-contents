@@ -1,0 +1,108 @@
+library(shiny)
+library(leaflet)
+library(knitr)
+#library(gridExtra)
+
+# Define server logic for slider examples
+shinyServer(function(input, output){
+  
+  UUUH <- reactive({
+    input$update
+        pal <- sample(brewer.pal(8,"Dark2"))
+  })
+  # Show the values using an HTML table
+  
+  output$TableL <- renderTable({
+    
+    #input$update
+          #getwd()
+            #TableL<-TableL[TableL$RazaPrimaria %in% input$RazaPrimaria,]
+            TableL <- TableL
+        })
+
+head(TableL)
+  
+
+  output$TableL <- renderDataTable({
+    TableL12 <- TableL[,c(1,3,4,5,6,7,8,13)]  
+    if (input$Estado != "All") {
+      TableL12 <- TableL12[TableL12$Estado == input$Estado,]
+    }else TableL12 <- TableL12
+    
+    #TableL<-TableL[TableL$Estado %in% input$Estado,]
+    #by lengua
+    if (input$RazaPrimaria != "All") {
+      TableL12 <- TableL12[TableL12$RazaPrimaria == input$RazaPrimaria,]
+    }else TableL12 <- TableL12
+#    TableL12
+    if (input$ANP_RPC_CONANP != "All") {
+      TableL12 <- TableL12[TableL12$ANP_RPC_CONANP == input$ANP_RPC_CONANP,]
+    }else TableL12 <- TableL12
+    
+    if (input$RegionCONANP != "All") {
+      TableL12 <- TableL12[TableL12$RegionCONANP == input$RegionCONANP,]
+    }else TableL12 <- TableL12
+    
+    #TableL12<-TableL12[TableL12$AnioColecta==input$AnioColecta,]
+    TableL12 <- TableL12[TableL12$AnioColecta %in% input$AnioColecta,]
+    
+    })
+  
+ #Para la tabla en csv 
+  output$downloadData <- downloadHandler(
+    filename = function() { paste("Tabla", '.csv', sep = '') },
+    content = function(file) {
+      write.csv(points(), file)
+    }
+  )
+  
+
+  
+  #### For the map
+  points <- reactive({
+    TableL12 <- TableL[,c(10,11,1,3,4,5,6,7,8,13)]  
+    if (input$Estado != "All") {
+      TableL12 <- TableL12[TableL12$Estado == input$Estado,]
+    }else TableL12 <- TableL12
+    
+    #TableL<-TableL[TableL$Estado %in% input$Estado,]
+    #by lengua
+    if (input$RazaPrimaria != "All") {
+      TableL12 <- TableL12[TableL12$RazaPrimaria == input$RazaPrimaria,]
+    }else TableL12 <- TableL12
+    #    TableL12
+    if (input$ANP_RPC_CONANP != "All") {
+      TableL12 <- TableL12[TableL12$ANP_RPC_CONANP == input$ANP_RPC_CONANP,]
+    }else TableL12 <- TableL12
+    
+    if (input$RegionCONANP != "All") {
+      TableL12 <- TableL12[TableL12$RegionCONANP == input$RegionCONANP,]
+    }else TableL12 <- TableL12
+    
+    TableL12 <- TableL12[TableL12$AnioColecta %in% input$AnioColecta,]
+  
+  })
+  
+  output$mymap <- renderLeaflet({
+    pal <- sample(brewer.pal(8,"Dark2"))  
+    pal3 <- pal
+    TT <- paste(points()$RazaPrimaria)
+    Goldberg <- points()
+     leaflet(data = Goldberg) %>%
+      addTiles() %>%
+      addCircleMarkers(~longitude, ~latitude, radius = 4, group = TT, popup = paste("Numero de Beneficiario=",points()$NumeroBeneficiarios,",","Raza=",points()$RazaPrimaria) ,fillOpacity = 0.1, color = pal[1],clusterOptions = markerClusterOptions()) %>%
+      #addCircleMarkers(Goldberg$longitude, Goldberg$latitude, weight=4, radius=7, group=TT, popup =paste("Numero de Beneficiario=",Goldberg$NumeroBeneficiarios,",","Raza=",Goldberg$RazaPrimaria) ,fillOpacity = 0.1, color=pal[1],clusterOptions = markerClusterOptions())%>%
+      addMeasure(primaryLengthUnit = "kilometers", primaryAreaUnit = "hectares",activeColor = "#C8F2BE") %>%
+      addLayersControl(
+        #baseGroups = c("OSM (default)", "Toner", "Toner Lite"),
+        overlayGroups = c(TT),
+        options = layersControlOptions(collapsed = T))
+    #addCircleMarkers(~longitude, ~latitude, popup =paste(sep = " ","Altitud=",as.factor(TableL$Altitud), "msnm","Altura del maiz",as.factor(TableL$Altura_de_planta),"cm"), radius=3, fillOpacity = 0.5, color=UUUH())
+  })
+  
+  
+  #Barplot by raza
+  
+})
+
+  

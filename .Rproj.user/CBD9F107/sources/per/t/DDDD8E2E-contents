@@ -1,0 +1,70 @@
+library(tidyverse)
+library(readxl)
+library(sp)
+library(rgeos)
+library(maptools)
+library(rgdal)
+library(scales)
+#library(downloader)
+library(shiny)
+library(leaflet)
+library(RColorBrewer)
+
+#setwd("C:\\Users\\aponce\\Dropbox\\JANO\\2016\\Conabio\\shiny_conanp\\")
+#setwd("~/Dropbox/JANO/2016/Conabio/shiny_conanp/")
+#getwd()
+dir()
+
+TableP <- read_xlsx("Consulta_Alex_abril.xlsx", sheet = "RawData", col_names = T)
+
+
+#TableP <- read.delim("Consulta_Alex_abril.csv", header = T, sep = "\t", fill = T, fileEncoding = "WINDOWS-1252", dec = ".")
+dir()
+
+head(TableP)
+summary(TableP)
+names(TableP)
+TableP <- TableP[,1:107]
+
+TableP$AnioColecta <- as.factor(TableP$AnioColecta)
+dim(TableP)
+summary(TableP)[,1:9]
+
+#TableP <- TableP %>%
+#  select(AnioColecta != "9999")
+
+#TableP <- TableP[TableP$AnioColecta != '9999',]
+names(TableP)
+head(TableP)
+TTabla <- TableP %>%
+  filter(!is.na(RazaPrimaria)) %>%
+  #filter(AnioColecta<3000)%>%
+  filter(!is.na(Latitud))
+dim(TTabla)
+summary(TTabla[,1:9])
+names(TTabla)
+TTabla[,c(31,42,43)]
+TableL <- TTabla %>%
+  select(RazaPrimaria,InfluenciaOtrasRazas, RegionCONANP, ANP_RPC_CONANP,
+         AnioColecta,Estado, Municipio, Localidad,Altitud,longitude = Longitud,latitude = Latitud,
+         LongitudMazorca(cm),Localidad,NumeroBeneficiarios,SuperficieTotal(ha), SuperficeSembrada(ha))
+
+TableL <- TableL[order(TableL$RazaPrimaria),]
+head(TableL)
+names(TableL)[14] <- c("SupTotal")
+names(TableL)[15] <- c("SupSembrada")
+head(TableL)
+
+
+#summary(TableL[,1:6])
+#TableL[TableL$RazaPrimaria == "Vandenho",]
+TableL <- TableL[TableL$AnioColecta != "9999",]
+#TableL <- TableL[TableL$AnioColecta!=NA,]
+head(TableL)
+names(TableL)
+
+#library(xtable)
+#LLL <- TableL[1:10,1:3]
+#pdf("trade.pdf",height=11, width=8.5)
+#grid.table(LLL)
+#dev.off()

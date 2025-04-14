@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1566613108935.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "800362294",
+    "id" : "DDDD8E2E",
+    "lastKnownWriteTime" : 1566615417,
+    "last_content_update" : 1566615417726,
+    "path" : "~/Dropbox/JANO/2016/Conabio/shiny_conanp/global.R",
+    "project_path" : "global.R",
+    "properties" : {
+        "cursorPosition" : "13,33",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
