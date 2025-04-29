@@ -1,21 +1,11 @@
-library(shiny)
-library(shinyjs)
-library(shinyWidgets)
-library(shinydashboard)
-# library(shinydashboardPlus)
-library(shinythemes)
-library(data.table)
-library(leaflet)
-library(DT)
-library(slickR)
-
 # Define UI for the application
 shinyUI(fluidPage(
     # Navbar layout with two pages
     navbarPage(
         tags$div(
             style = "text-align: center;",
-            tags$img(src = "logo_conanp.png", height = "70px", style = "margin-right: 10px;"), # Espacio a la derecha
+            tags$img(src = "logo_conanp.png", height = "70px", 
+                     style = "margin-right: 10px;"), # Espacio a la derecha
             tags$img(src = "logo_conabio.png", height = "70px")
         ),
         title = "PROMAC",  # Título de la aplicación

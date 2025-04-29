@@ -8,3 +8,6 @@ database/database_2022.xlsx
 database/Shiny_PROMAC_2024.xlsx
 
 .DS_Store
+.Rproj.user
+.Rhistory
+.RData
