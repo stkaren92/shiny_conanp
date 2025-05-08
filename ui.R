@@ -100,17 +100,20 @@ tabsetPanel(id = "tabs",
                          
                          sidebarLayout(
                              sidebarPanel(
-                                 selectizeGroupUI(
+                                 select_group_ui(
                                      id = "my_filters",
                                      params = list(
-                                         RegionCONANP = list(inputId = "RegionCONANP", title = "Región CONANP:"),
-                                         ANP_RPC_CONANP = list(inputId = "ANP_RPC_CONANP", title = "Nombre Área de Conservación:"),
-                                         CategoriaConservacion = list(inputId = "CategoriaConservacion", title = "Categoría de Conservación:"),
-                                         CategoriaANP = list(inputId = "CategoriaANP", title = "Categoria Áreas Naturales Protegidas:"),
-                                         Estado = list(inputId = "Estado", title = "Estado:"),
-                                         RazaPrimaria = list(inputId = "RazaPrimaria", title = "Raza Primaria:"),
-                                         AnioColecta = list(inputId = "AnioColecta", title = "Año de Apoyo:")
-                                     ),
+                                         RegionCONANP = list(inputId = "RegionCONANP", label = "Región CONANP:"),
+                                         ANP_RPC_CONANP = list(inputId = "ANP_RPC_CONANP", label = "Nombre Área de Conservación:"),
+                                         CategoriaConservacion = list(inputId = "CategoriaConservacion", label = "Categoría de Conservación:"),
+                                         CategoriaANP = list(inputId = "CategoriaANP", label = "Categoria Áreas Naturales Protegidas:"),
+                                         Estado = list(inputId = "Estado", label = "Estado:"),
+                                         RazaPrimaria = list(inputId = "RazaPrimaria", label = "Raza Primaria:"),
+                                         AnioColecta = list(inputId = "AnioColecta", label = "Año de Apoyo:")
+                                     ),  
+                                     vs_args = list(disableSelectAll = FALSE,
+                                                    showValueAsTags = TRUE,
+                                                    width = "100%"),
                                      inline = FALSE
                                  ),
                                  br(),

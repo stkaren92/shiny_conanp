@@ -5,31 +5,34 @@ shinyServer(function(input, output, session){
         updateTabsetPanel(session, "tabs", selected = "Distribución de maíces")
     })
     
-    points <- callModule(
-        module = selectizeGroupServer,
+    points_mod <- select_group_server(
         id = "my_filters",
-        data = TableL,
-        vars = c("RazaPrimaria", "RegionCONANP", "ANP_RPC_CONANP", 
+        data = reactive(TableL),
+        vars = reactive(c("RazaPrimaria", "RegionCONANP", "ANP_RPC_CONANP", 
                  "CategoriaConservacion",
-                 "CategoriaANP","AnioColecta", "Estado"), 
-        inline = FALSE
+                 "CategoriaANP","AnioColecta", "Estado"))
     )
+    
+    output$points <- reactable::renderReactable({
+        req(points_mod())
+        reactable::reactable(points_mod())
+    })
 
-  
     output$mymap <- renderLeaflet({
-        Goldberg <- points()
+        req(points_mod())
+        Goldberg <- points_mod()
         leaflet(data = Goldberg) %>%
             addTiles() %>%
             addCircleMarkers(~longitude, ~latitude, radius = 4, 
                              popup = paste(sep = "",
                                            "Raza primaria = ",Goldberg$RazaPrimaria,"<br/>",
-                             "Número de Beneficiario = ",Goldberg$NumeroBeneficiario, "<br/>",
+                             "Número de Beneficiario = ",Goldberg$NumeroBeneficiarios, "<br/>",
                              "<b><a href='https://www.biodiversidad.gob.mx/diversidad/alimentos/maices/razas-de-maiz'>Información sobre la Raza de maíz</a></b>"),
                              clusterOptions = markerClusterOptions())
     })
     
     output$TablaF <- DT::renderDataTable({
-        DT::datatable(points() %>% 
+        DT::datatable(points_mod() %>% 
                           dplyr::select("Estado", "Municipio",
                                         "Region CONANP" = "RegionCONANP",
                                         "Área de Conservación" = "ANP_RPC_CONANP",
@@ -42,7 +45,7 @@ shinyServer(function(input, output, session){
     output$downloadData <- downloadHandler(
         filename = function() { paste("Tabla", '.xlsx', sep = '') },
         content = function(file) {
-            writexl::write_xlsx(points() , file)
+            writexl::write_xlsx(points_mod() , file)
         }
     )
     

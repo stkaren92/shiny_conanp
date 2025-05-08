@@ -5,6 +5,7 @@ library(shinythemes)
 library(slickR)
 library(shinyWidgets)
 library(leaflet)
+library(datamods)
 
 TableP1 <- read_xlsx("database/Shiny_PROMAC_2024_12Nov.xlsx", 
                      sheet = "Shiny_PROMAC_2024_12Nov", col_types = "text") 
@@ -46,3 +47,8 @@ TableL <- TableL %>%
                                     RazaPrimaria == "Cónico norteño" ~ "Cónico Norteño", 
                                     RazaPrimaria == "Elotes cónicos" ~ "Elotes Cónicos", 
                                     TRUE ~ RazaPrimaria))
+
+TableL <- TableL %>%
+    mutate_at(c("RazaPrimaria", "RegionCONANP", "ANP_RPC_CONANP", 
+                "CategoriaConservacion",
+                "CategoriaANP","AnioColecta", "Estado"), as.factor)
