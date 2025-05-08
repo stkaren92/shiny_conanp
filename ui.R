@@ -2,16 +2,14 @@
 shinyUI(fluidPage(
     # Navbar layout with two pages
     navbarPage(
-        tags$div(
-            style = "text-align: center;",
-            tags$img(src = "logo_conanp.png", height = "70px", 
-                     style = "margin-right: 10px;"), # Espacio a la derecha
-            tags$img(src = "logo_conabio.png", height = "70px")
+        title = div(
+            tags$img(src = "logo_conanp.png", height = "30px", style = "margin-right: 10px;"),
+            tags$img(src = "logo_conabio.png", height = "30px")
         ),
-        title = "PROMAC",  # Título de la aplicación
-        theme = shinytheme("flatly"),  # Tema visual
-        
-tabsetPanel(id = "tabs",
+        windowTitle = "PROMAC",
+        id = "tabs",
+        theme = shinytheme("flatly"),
+            
             # Primera página: Resumen con imagen
             tabPanel("Resumen",
                      fluidPage(
@@ -141,7 +139,6 @@ tabsetPanel(id = "tabs",
                              )
                          )
                      )
-            ) #fin de pagina 2
-)
-    )
+            )
+    ) # Fin navbarPage
 ))
