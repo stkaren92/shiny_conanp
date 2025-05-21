@@ -26,9 +26,9 @@ shinyServer(function(input, output, session){
             addCircleMarkers(~longitude, ~latitude, radius = 4, 
                              popup = paste(sep = "",
                                            "Raza primaria = ",Goldberg$RazaPrimaria,"<br/>",
-                             "Número de Beneficiario = ",Goldberg$NumeroBeneficiarios, "<br/>",
+                             "Número de Beneficiarios = ",Goldberg$NumeroBeneficiarios, "<br/>",
                              "<b><a href='https://www.biodiversidad.gob.mx/diversidad/alimentos/maices/razas-de-maiz'>Información sobre la Raza de maíz</a></b>"),
-                             clusterOptions = markerClusterOptions())
+                             clusterOptions = markerClusterOptions(spiderfyDistanceMultiplier=2))
     })
     
     output$TablaF <- DT::renderDataTable({
@@ -37,7 +37,7 @@ shinyServer(function(input, output, session){
                                         "Region CONANP" = "RegionCONANP",
                                         "Área de Conservación" = "ANP_RPC_CONANP",
                                         "Raza primaria" = "RazaPrimaria",
-                                        "Núm. Beneficiados" = "NumeroBeneficiarios"))
+                                        "Núm. Beneficiarios" = "NumeroBeneficiarios"))
     })
     
     #Para la tabla en csv 
