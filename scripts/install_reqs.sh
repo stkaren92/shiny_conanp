@@ -19,18 +19,20 @@ apt_install \
     libgdal-dev 
 
 install2.r --error --skipinstalled -n "$NCPUS" \
-    tidyverse \
-    readxl \
-    shinythemes \
-    slickR \
-    shinyWidgets \
-    shinydashboardPlus \
+    datamods \
+    devtools \
     DT \
-    writexl \
-    leaflet  
+    leaflet \
+    shiny \
+    shinydashboard \
+    shinydashboardPlus \
+    shinythemes \
+    shinyWidgets \
+    tidyverse  
 
 ## a bridge to far? -- brings in another 60 packages
 # install2.r --error --skipinstalled -n "$NCPUS" tidymodels
+R -q -e "devtools::install_github('yonicd/slickR')"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
@@ -41,8 +43,8 @@ rm -rf /tmp/downloaded_packages
 strip /usr/local/lib/R/site-library/*/libs/*.so
 
 # Check the readxl version
-echo -e "Check the readxl package...\n"
+echo -e "Check the leaflet package...\n"
 
-R -q -e "library(readxl)"
+R -q -e "library(leaflet)"
 
-echo -e "\nInstall readxl package, done!"
+echo -e "\nInstall leaflet package, done!"

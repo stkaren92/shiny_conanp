@@ -3,4 +3,4 @@ services:
     build: .  
     working_dir: /srv/app
     ports:
-      - 3838:3838  # Bind port 3838 on the host to 3838 in the container
+      - "${CONANP_EXTERNAL_PORT:-3838}:3838"  
